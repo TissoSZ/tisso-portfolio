@@ -1,1 +1,70 @@
-:root{color-scheme:dark;font-family:'Manrope',system-ui,sans-serif;background:#0a1017;color:#f5f7f3;font-synthesis:none}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;min-width:320px}::selection{background:#b9fb63;color:#10150f}button,input{font:inherit}
+/* Obsidian / Silver: shared palette and neutral material tones. */
+:root {
+  --bg: #08090B;
+  --surface: #17191D;
+  --mid: #525760;
+  --silver: #B8BCC3;
+  --text: #F3F1EB;
+  --muted: #9298A1;
+  --border: color-mix(in srgb, var(--silver) 18%, transparent);
+  --ring: color-mix(in srgb, var(--silver) 55%, transparent);
+  --glow: color-mix(in srgb, var(--silver) 28%, transparent);
+  --halo: color-mix(in srgb, var(--silver) 10%, transparent);
+  --sheen: color-mix(in srgb, var(--text) 5%, transparent);
+  --reflection: color-mix(in srgb, var(--text) 65%, transparent);
+  --accent: #A8C2DF;
+  --accent-glow: color-mix(in srgb, var(--accent) 10%, transparent);
+  --shadow: rgb(0 0 0 / 65%);
+  color-scheme: dark;
+  font-family: 'Manrope', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-synthesis: none;
+}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:25px}body{margin:0;min-width:320px}::selection{background:var(--silver);color:var(--bg)}button,input{font:inherit}
+
+/* Progressive enhancement: visible by default, including without JavaScript.
+   Finite animations never leave content hidden, even if cleanup cannot run. */
+.reveal-line { display: block; }
+.reveal-card { --reveal-angle: 2deg; --reveal-distance: 22px; }
+.reveal-finale { --reveal-distance: 24px; --reveal-duration: 650ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-reveal.is-revealing {
+    animation: scroll-reveal var(--reveal-duration, 560ms) cubic-bezier(.2,.7,.2,1) var(--reveal-delay, 0ms) backwards;
+  }
+  .scroll-reveal:focus-within { animation: none; }
+}
+@keyframes scroll-reveal {
+  from {
+    opacity: 0;
+    transform: perspective(1000px) translate3d(0, var(--reveal-distance, 18px), 0) rotateX(var(--reveal-angle, 0deg));
+  }
+  to { opacity: 1; transform: perspective(1000px) translate3d(0, 0, 0) rotateX(0deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .scroll-reveal.is-revealing { animation: none; }
+}
+
+/* Shared focus and icon primitives used across component boundaries. */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.link-icon {
+  display: inline-block;
+  transition: translate .2s;
+}
+
+@media (hover: hover) {
+  a:hover > .link-icon {
+    translate: 2px -2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a:hover > .link-icon {
+    translate: none;
+  }
+}

@@ -1,0 +1,21 @@
+@let item = project();
+<article #surface class="project-card" [attr.aria-labelledby]="'project-' + item.index">
+  <div class="project-visual" [class.alternate]="item.alternate" aria-hidden="true">
+    <span class="visual-index">PROJECT / {{ item.index }}</span>
+    <div class="visual-symbol">{{ item.symbol }}</div>
+  </div>
+  <div class="project-info">
+    <div class="project-heading">
+      <span class="project-kind">{{ item.kind }}</span>
+      <h3 [id]="'project-' + item.index">{{ item.name }}</h3>
+    </div>
+    <p>{{ item.description }}</p>
+    <ul class="tags" aria-label="Tecnologias do projeto">
+      @for (tag of item.stack; track tag) { <li>{{ tag }}</li> }
+    </ul>
+    <a class="project-link" [href]="item.href" target="_blank" rel="noopener noreferrer"
+      [attr.aria-label]="'VER NO GITHUB — ' + item.name">
+      VER NO GITHUB <span class="link-icon" aria-hidden="true">↗</span>
+    </a>
+  </div>
+</article>

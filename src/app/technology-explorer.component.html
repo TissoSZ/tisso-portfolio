@@ -1,0 +1,33 @@
+<aside class="stack-panel" aria-label="Explore as tecnologias e ferramentas">
+  <div class="stack-top">TECNOLOGIAS E FERRAMENTAS</div>
+  <p class="explorer-hint">Selecione uma tecnologia para conhecer seu contexto.</p>
+
+  @for (group of groups; track group.title; let groupIndex = $index) {
+    <section class="skill-group" [attr.aria-labelledby]="'skill-group-' + groupIndex">
+      <h3 [id]="'skill-group-' + groupIndex">{{ group.title }}</h3>
+      <ul class="technology-options">
+        @for (technology of group.items; track technology.id; let i = $index) {
+          <li appReveal [revealDelay]="i * 22">
+            <button class="tech-choice" type="button"
+              [attr.aria-pressed]="selectedTechnology().id === technology.id"
+              aria-controls="technology-details"
+              (click)="selectTechnology(technology, group.title)">
+              {{ technology.name }}
+            </button>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <div id="technology-details" class="technology-details" aria-live="polite" aria-atomic="true">
+    <!-- Keying only this content replays the short transition without moving focus. -->
+    @for (technology of [selectedTechnology()]; track technology.id) {
+      <div class="detail-content">
+        <span class="detail-context">{{ technology.context }}</span>
+        <h3>{{ technology.name }}</h3>
+        <p>{{ technology.description }}</p>
+      </div>
+    }
+  </div>
+</aside>

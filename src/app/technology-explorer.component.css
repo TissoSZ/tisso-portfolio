@@ -1,0 +1,125 @@
+:host {
+  display: block;
+  min-width: 0;
+  align-self: start;
+}
+
+.stack-panel {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 30px;
+}
+
+.stack-top {
+  color: var(--silver);
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  line-height: 1.7;
+}
+
+.explorer-hint {
+  margin: 12px 0 28px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.skill-group + .skill-group {
+  margin-top: 26px;
+}
+
+.skill-group h3 {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font: 10px 'DM Mono', monospace;
+  letter-spacing: 1px;
+  line-height: 1.7;
+  text-transform: uppercase;
+}
+
+.technology-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tech-choice {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--silver);
+  font: 11px 'DM Mono', monospace;
+  line-height: 1.7;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+}
+
+.tech-choice[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-glow);
+}
+
+.tech-choice:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.technology-details {
+  margin-top: 28px;
+  padding: 22px;
+  min-block-size: 260px;
+  border-top: 1px solid var(--ring);
+  background: linear-gradient(145deg, var(--accent-glow), transparent 75%), var(--surface);
+}
+
+.detail-context {
+  display: block;
+  color: var(--muted);
+  font: 10px 'DM Mono', monospace;
+  line-height: 1.7;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.detail-content h3 {
+  margin: 12px 0;
+  font-size: 24px;
+  line-height: 1.3;
+  letter-spacing: -.5px;
+}
+
+.detail-content p {
+  margin: 0;
+  color: var(--silver);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@media (hover: hover) {
+  .tech-choice:hover:not([aria-pressed='true']) {
+    color: var(--text);
+    border-color: var(--silver);
+    background: var(--sheen);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .detail-content {
+    animation: technology-reveal 180ms ease-out;
+  }
+}
+
+@keyframes technology-reveal {
+  from { opacity: .35; translate: 0 5px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@media (max-width: 950px) {
+  .stack-panel { padding: 22px; }
+  .technology-details { padding: 18px; }
+}
